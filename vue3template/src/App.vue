@@ -1,10 +1,67 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
+import { RouterLink, RouterView } from "vue-router";
+import HelloWorld from "@/components/HelloWorld.vue";
+import {
+  Location,
+  Document,
+  Menu as IconMenu,
+  Setting,
+} from "@element-plus/icons-vue";
 </script>
 
 <template>
-  <header>
+  <el-header style="text-align: center">股票績效</el-header>
+  <el-container
+    class="layout-container-demo"
+    style="height: 100%; border: 1px solid #eee"
+  >
+    <el-aside
+      height="100%"
+      width="200px"
+      style="background-color: rgb(238, 241, 246)"
+    >
+      <el-scrollbar>
+        <el-menu router>
+          <el-menu-item index="/about"
+            ><el-icon><location /></el-icon> <span>儀錶板</span>
+          </el-menu-item>
+          <el-menu-item index="/information">股利查詢</el-menu-item>
+        </el-menu>
+      </el-scrollbar>
+    </el-aside>
+    <el-container>
+      <el-header style="text-align: right; font-size: 12px">
+        股利績效
+        <div class="toolbar">
+          <el-dropdown>
+            <el-icon style="margin-right: 8px; margin-top: 1px"
+              ><setting
+            /></el-icon>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>View</el-dropdown-item>
+                <el-dropdown-item>Add</el-dropdown-item>
+                <el-dropdown-item>Delete</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <span>Tom</span>
+        </div>
+      </el-header>
+
+      <el-main>
+        <el-scrollbar>
+          <RouterView />
+        </el-scrollbar>
+      </el-main>
+    </el-container>
+    <!-- <el-container>
+      <el-header>Header</el-header>
+      <el-main>Main</el-main>
+    </el-container> -->
+  </el-container>
+
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
@@ -16,13 +73,11 @@ import HelloWorld from '@/components/HelloWorld.vue'
         <RouterLink to="/information">Information</RouterLink>
       </nav>
     </div>
-  </header>
-
-  <RouterView />
+  </header> -->
 </template>
 
 <style>
-@import '@/assets/base.css';
+/* @import "@/assets/base.css";
 
 #app {
   max-width: 1280px;
@@ -116,5 +171,47 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+} */
+
+/* 將畫面稱到100% */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 來源於index.html的 #app */
+#app {
+  height: 100%;
+}
+/***********************/
+
+.layout-container-demo .el-header {
+  position: relative;
+  /* height: 100%; */
+  background-color: #b3c0d1;
+  color: var(--el-text-color-primary);
+}
+.layout-container-demo .el-aside {
+  width: 240px;
+  color: var(--el-text-color-primary);
+  background: #fff !important;
+  border-right: solid 1px #e6e6e6;
+  box-sizing: border-box;
+}
+.layout-container-demo .el-menu {
+  border-right: none;
+}
+.layout-container-demo .el-main {
+  padding: 0;
+}
+.layout-container-demo .toolbar {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
 }
 </style>
