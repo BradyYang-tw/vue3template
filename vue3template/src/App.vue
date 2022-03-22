@@ -5,56 +5,128 @@ import {
   Location,
   Document,
   Menu as IconMenu,
+  Expand,
+  Fold,
   Setting,
 } from "@element-plus/icons-vue";
+import { ref } from "vue";
+const isCollapse = ref(true);
+// const handleOpen = (key: string, keyPath: string[]) => {
+//   console.log(key, keyPath);
+// };
+// const handleClose = (key: string, keyPath: string[]) => {
+//   console.log(key, keyPath);
+// };
+
+// 初始化頁面
+const isSider = ref(true);
+const initPage = () => {
+  const screenWidth = document.body.clientWidth;
+  if (screenWidth < 1000) {
+    isSider.value = false;
+    isCollapse.value = true;
+  } else if (screenWidth >= 1000 && screenWidth < 1200) {
+    isSider.value = false;
+    isCollapse.value = true;
+  } else {
+    isSider.value = true;
+    isCollapse.value = false;
+  }
+};
+initPage();
 </script>
 
 <template>
-  <el-header style="text-align: center">股票績效</el-header>
   <el-container
     class="layout-container-demo"
     style="height: 100%; border: 1px solid #eee"
   >
     <el-aside
       height="100%"
-      width="200px"
+      width="auto"
       style="background-color: rgb(238, 241, 246)"
     >
-      <el-scrollbar>
-        <el-menu router>
-          <el-menu-item index="/about"
-            ><el-icon><location /></el-icon> <span>儀錶板</span>
-          </el-menu-item>
-          <el-menu-item index="/information">股利查詢</el-menu-item>
-        </el-menu>
-      </el-scrollbar>
+      <div>
+        <img
+          alt
+          class="logoimg"
+          src="https://www.beclass.com/share/201712/213c9ce5a31e7f3ae6e31130r.jpg"
+        />
+        <h2 v-if="isSider" class="tit-text" style="color: black">
+          Brady股利績效系統
+        </h2>
+      </div>
+
+      <!-- <el-scrollbar> -->
+      <el-menu
+        router
+        :collapse="isCollapse"
+        @open="handleOpen"
+        @close="handleClose"
+      >
+        <el-menu-item index="/about"
+          ><el-icon><location /></el-icon> <span>儀錶板</span>
+        </el-menu-item>
+        <el-menu-item index="/information"
+          ><el-icon><location /></el-icon><span>股利查詢</span>
+        </el-menu-item>
+      </el-menu>
+      <!-- </el-scrollbar> -->
     </el-aside>
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        股利績效
-        <div class="toolbar">
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px"
-              ><setting
-            /></el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>Tom</span>
-        </div>
+      <!-- <transition
+        :duration="{ enter: 800, leave: 100 }"
+        mode="out-in"
+        name="el-fade-in-linear"
+      >
+        <div
+          style="width:20px"
+        > -->
+      <el-header style="padding: 0 16px">
+        <el-row>
+          <el-col :xs="2" :lg="1" :md="1" :sm="1" :xl="1" style="z-index: 100">
+            <el-button
+              :icon="isCollapse ? Fold : Expand"
+              @click="
+                isCollapse = !isCollapse;
+                isSider = !isSider;
+              "
+              size="large"
+            />
+          </el-col>
+
+          <el-col :xs="10" :lg="14" :md="14" :sm="9" :xl="14">
+            股利績效
+          </el-col>
+          <el-col :xs="12" :lg="9" :md="9" :sm="14" :xl="9">
+            <div class="toolbar">
+              <el-dropdown>
+                <el-icon style="margin-right: 8px; margin-top: 1px"
+                  ><setting
+                /></el-icon>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item>View</el-dropdown-item>
+                    <el-dropdown-item>Add</el-dropdown-item>
+                    <el-dropdown-item>Delete</el-dropdown-item>
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
+              <span>Tom</span>
+            </div>
+          </el-col>
+        </el-row>
       </el-header>
 
-      <el-main>
+      <el-main style="background-color: pink">
         <el-scrollbar>
           <RouterView />
         </el-scrollbar>
       </el-main>
+      <!-- </div>
+      </transition> -->
     </el-container>
+
     <!-- <el-container>
       <el-header>Header</el-header>
       <el-main>Main</el-main>
@@ -186,10 +258,14 @@ body {
   height: 100%;
 }
 /***********************/
+/* .el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
 
 .layout-container-demo .el-header {
   position: relative;
-  /* height: 100%; */
+  height: 100%;
   background-color: #b3c0d1;
   color: var(--el-text-color-primary);
 }
@@ -213,5 +289,22 @@ body {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+} */
+
+.logoimg {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  background: #fff;
+  border-radius: 80%;
+  padding: 3px;
+}
+.tit-text {
+  display: inline-block;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  vertical-align: middle;
+  padding-left: 10px;
 }
 </style>
