@@ -43,7 +43,7 @@ const initPage = () => {
 initPage();
 
 onMounted(() => {
-  // RWD
+  // RWD：The resize event fires when the document view (window) has been resized.
   window.onresize = () => {
     return (() => {
       initPage();
@@ -135,9 +135,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-// @import '@/style/main.scss';
-// @import '@/style/base.scss';
-// @import '@/style/mobile.scss';
 
 #app {
   background: #eee;
@@ -148,19 +145,7 @@ onMounted(() => {
 .el-button {
   font-weight: 400 !important;
 }
-/* 將畫面稱到100% */
-/* html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-} */
 
-/* 來源於index.html的 #app */
-/* #app {
-  height: 100%;
-} */
-/***********************/
 
 .logoimg {
   width: 50px;
@@ -178,14 +163,7 @@ body {
   vertical-align: middle;
   padding-left: 10px;
 }
-$width-aside: 220px;
-// .el-main {
-//   min-height: 100%;
-//   -webkit-transition: margin-left 0.28s;
-//   transition: margin-left 0.28s;
-//   // margin-left: $width-aside;
-//   position: relative;
-// }
+
 .main-aside {
   height: 100%;
   width: auto;
