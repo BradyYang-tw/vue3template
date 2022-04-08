@@ -1,60 +1,80 @@
-.clearflex {
-    *zoom: 1;
-}
-
-.clearflex:after {
-    content: '';
-    display: block;
-    height: 0;
-    visibility: hidden;
-    clear: both;
-}
-
-.fl-left {
-    float: left;
-}
-
-.fl-right {
-    float: right;
-}
-
-.mg {
-    margin: 10px !important;
-}
-
-.left-mg-xs {
-    margin-left: 6px !important;
-}
-
-.left-mg-sm {
-    margin-left: 10px !important;
-}
-
-.left-mg-md {
-    margin-left: 14px !important;
-}
-
-.top-mg-lg {
-    margin-top: 20px !important;
-}
-
-.tb-mg-lg {
-    margin: 20px 0 !important;
-}
-
-.bottom-mg-lg {
-    margin-bottom: 20px !important;
-}
-
-.left-mg-lg {
-    margin-left: 18px !important;
-}
-
-.title-1 {
-    text-align: center;
-    font-size: 32px;
-}
-
-.title-3 {
-    text-align: center;
-}
+#app {
+    background: #eee;
+    // height: 100vh;
+    overflow: hidden;
+    font-weight: 400 !important;
+  }
+//   .el-button {
+//     font-weight: 400 !important;
+//   }
+.logoimg {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    background: #fff;
+    border-radius: 80%;
+    padding: 3px;
+  }
+  .tit-text {
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    vertical-align: middle;
+    padding-left: 10px;
+  }
+  
+  .main-aside {
+    height: 100%;
+    width: auto;
+    // background-color: rgb(238, 241, 246);
+    overflow: auto;
+  }
+  
+  .openside {
+    // background: rgb(0, 0, 0);
+    // opacity: 0.3;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+  }
+  
+  $width-hideside-aside: 54px;
+  .hideside {
+    width: 100%;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    .main-aside {
+      // width: $width-hideside-aside;
+      height: 100%;
+      width: auto;
+    // background-color: rgb(238, 241, 246);
+    // overflow: auto;
+    }
+  }
+  // 手機版本
+  .mobile.hideside {
+    .el-aside {
+      -webkit-transition-duration: 0.2s;
+      transition-duration: 0.2s;
+      -webkit-transform: translate3d(-210px, 0, 0);
+      transform: translate3d(-220px, 0, 0);
+      width: 0px;
+    }
+  }
+  $width-mobile-aside: 210px;
+  .mobile {
+    .el-aside {
+      -webkit-transition: -webkit-transform 0.28s;
+      transition: -webkit-transform 0.28s;
+      transition: transform 0.28s;
+      transition: transform 0.28s, -webkit-transform 0.28s;
+      width: $width-mobile-aside;
+    }
+  }
